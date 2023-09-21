@@ -1,13 +1,15 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-
-type Data = {
-  name: string
-}
+import yaml from 'js-yaml'
+import fs from 'fs'
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse
 ) {
-  res.status(200).json({ name: 'John Doe' })
+  // const { yml } = req.body
+  // const json = yaml.load(yml)
+  // console.log(json)
+  // res.status(200).json(json)
 }
+
