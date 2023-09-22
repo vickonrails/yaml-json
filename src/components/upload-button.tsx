@@ -2,7 +2,15 @@ import { ChangeEvent, useCallback, useRef } from "react"
 import { Button, ButtonProps } from "./button"
 
 interface UploadButtonProps extends Omit<ButtonProps, 'onChange' | 'onClick'> {
-    onFilePicked?: (content: string) => void
+    onFilePicked?: (content: string, filename: string) => void
+}
+
+function getFilename(filename: string) {
+    const lastDotIndex = filename.lastIndexOf('.');
+    if (lastDotIndex !== -1) {
+        return filename.substring(0, lastDotIndex);
+    }
+    return filename;
 }
 
 export function UploadButton({ onFilePicked, ...rest }: UploadButtonProps) {
@@ -15,7 +23,8 @@ export function UploadButton({ onFilePicked, ...rest }: UploadButtonProps) {
         reader.readAsText(file)
         reader.onload = () => {
             const text = reader.result as string
-            onFilePicked?.(text);
+            const filename = getFilename(file.name)
+            onFilePicked?.(text, filename);
         }
     }, [onFilePicked])
 

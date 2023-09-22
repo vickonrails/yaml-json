@@ -5,11 +5,13 @@ import { UploadButton } from './upload-button'
 interface HeaderProps {
     setValue: (value: string) => void
     navigateTarget: React.RefObject<HTMLTextAreaElement>
+    setFilename: (filename: string) => void
 }
 
-const Header = ({ setValue, navigateTarget }: HeaderProps) => {
-    const onFilePicked = useCallback((content: string) => {
-        setValue(content);
+const Header = ({ setValue, setFilename, navigateTarget }: HeaderProps) => {
+    const onFilePicked = useCallback((content: string, filename: string) => {
+        setFilename(filename)
+        setValue(content)
     }, [])
 
     const navigateToInput = useCallback(() => {
