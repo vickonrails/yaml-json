@@ -24,6 +24,7 @@ export function UploadButton({ onFilePicked, ...rest }: UploadButtonProps) {
         reader.onload = () => {
             const text = reader.result as string
             const filename = getFilename(file.name)
+            if (inputRef.current) inputRef.current.value = '';
             onFilePicked?.(text, filename);
         }
     }, [onFilePicked])

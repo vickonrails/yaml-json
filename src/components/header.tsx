@@ -12,7 +12,7 @@ const Header = ({ setValue, setFilename, navigateTarget }: HeaderProps) => {
     const onFilePicked = useCallback((content: string, filename: string) => {
         setFilename(filename)
         setValue(content)
-    }, [])
+    }, [setValue, setFilename]);
 
     const navigateToInput = useCallback(() => {
         const input = navigateTarget.current;

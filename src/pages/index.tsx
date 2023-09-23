@@ -36,12 +36,12 @@ export default function Home() {
       return
     }
     navigator.clipboard.writeText(value)
-  }, [])
+  }, [json, value])
 
   return (
     <main className='h-full bg-foreground'>
       <Header navigateTarget={inputRef} setValue={setValue} setFilename={setFilename} />
-      <section className='flex gap-3 max-w-[1300px] mx-auto mb-9'>
+      <section className='flex gap-3 flex-col lg:flex-row max-w-[1300px] mx-auto mb-9 px-7'>
         <div className='flex-1 relative group'>
           <textarea
             ref={inputRef}
@@ -56,7 +56,7 @@ export default function Home() {
         </div>
 
         <div className='flex-1 relative group'>
-          <div className='w-full h-[90vh] overflow-y-auto rounded-md '>
+          <div className='w-full h-[90vh] overflow-y-auto rounded-md'>
             <JSONBlock json={json} />
           </div>
           <CopyToClipboard
