@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 const ThemeSwitcher = dynamic(
     () => import('@/components/theme-switcher'), {
     ssr: false,
-    loading: () => <div>Loading...</div>
+    loading: () => <div className="h-5 w-5 bg-neutral-300 rounded-md" />
 })
 
 function Nav() {

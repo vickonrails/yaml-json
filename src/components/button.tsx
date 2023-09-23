@@ -11,9 +11,9 @@ export function Button({ variants = 'primary', ...props }: ButtonProps) {
     return (
         <button
             className={cn(
-                'px-4 py-2 rounded-md min-w-[120px] text-center font-medium',
-                variants === 'primary' && 'bg-primary text-white hover:bg-purple-900',
-                variants === 'secondary' && 'border border-neutral-300 text-primary'
+                'px-4 py-2 rounded-md min-w-[120px] text-center font-medium transition-colors',
+                variants === 'primary' && 'bg-primary text-white hover:bg-primary-hover',
+                variants === 'secondary' && 'border border-neutral-400 text-neutral-800',
             )}
             {...props}
         />
@@ -29,20 +29,24 @@ interface CopyToClipboardProps extends React.ButtonHTMLAttributes<HTMLButtonElem
     icon?: React.ReactNode
 }
 
-export function CopyToClipboard({ className, icon: baseIcon = <Clipboard size={18} />, onClick, ...props }: CopyToClipboardProps) {
+export function CopyToClipboard({ className, icon: baseIcon = <Clipboard size={20} />, onClick, ...props }: CopyToClipboardProps) {
     const [icon, setIcon] = useState(baseIcon)
     const classes = cn(
-        'absolute transition-opacity opacity-0 p-1 bg-slate-100 rounded-md top-4 right-4 z-10 bg-neutral-300 text-neutral-800 ',
+        'absolute transition-opacity opacity-0 p-1 bg-slate-100 rounded-md top-4 right-4 z-10 bg-neutral-200 text-neutral-600 hover:bg-neutral-300 transition-colors',
         className
     )
 
     const handleClick = useCallback((ev: MouseEvent<HTMLButtonElement>) => {
         onClick?.(ev);
-        setIcon(<Check size={18} />);
+        setIcon(<Check size={20} />);
 
-        setTimeout(() => {
+        const timer = setTimeout(() => {
             setIcon(baseIcon);
         }, 2000)
+
+        return () => {
+            clearTimeout(timer)
+        }
     }, [onClick])
 
     return (
@@ -73,7 +77,7 @@ export function Download({ content, filename, className, ...rest }: DownloadProp
 
     return (
         <CopyToClipboard
-            icon={<DownloadIcon size={18} />}
+            icon={<DownloadIcon size={20} />}
             onClick={handleClick}
             className={cn('right-12', className)}
             {...rest}

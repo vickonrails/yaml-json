@@ -7,7 +7,7 @@ import { useLocal } from './use-local';
 
 const JSONBlock = dynamic(() => import('@/components/json-block'), {
   ssr: false,
-  loading: () => <div>Loading...</div>
+  loading: () => <div className='mx-auto mt-20'>Loading...</div>
 })
 
 export default function Home() {
@@ -47,27 +47,33 @@ export default function Home() {
             ref={inputRef}
             onChange={handleChange}
             value={value}
-            className='rounded-md w-full p-2 whitespace-pre-wrap h-[90vh]'
+            className='rounded-md w-full p-2 whitespace-pre-wrap h-[90vh] border border-neutral-200 bg-accent-bg'
           />
-          <CopyToClipboard
-            onClick={_ => handleCopy('yaml')}
-            className="group-hover:opacity-100"
-          />
+          {value && (
+            <CopyToClipboard
+              onClick={_ => handleCopy('yaml')}
+              className="group-hover:opacity-100"
+            />
+          )}
         </div>
 
         <div className='flex-1 relative group'>
-          <div className='w-full h-[90vh] overflow-y-auto rounded-md'>
+          <div className={`w-full grid h-[90vh] overflow-y-auto rounded-md border border-neutral-200`}>
             <JSONBlock json={json} />
           </div>
-          <CopyToClipboard
-            onClick={_ => handleCopy('json')}
-            className="group-hover:opacity-100"
-          />
-          <Download
-            content={json}
-            filename={filename}
-            className='group-hover:opacity-100'
-          />
+          {json && (
+            <>
+              <CopyToClipboard
+                onClick={_ => handleCopy('json')}
+                className="group-hover:opacity-100"
+              />
+              <Download
+                content={json}
+                filename={filename}
+                className='group-hover:opacity-100'
+              />
+            </>
+          )}
         </div>
       </section>
     </main>
