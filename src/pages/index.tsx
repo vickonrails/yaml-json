@@ -3,7 +3,7 @@ import Header from '@/components/header';
 import { load } from 'js-yaml';
 import dynamic from 'next/dynamic';
 import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
-import { useLocal } from './use-local';
+import { useLocal } from '../components/use-local';
 
 const JSONBlock = dynamic(() => import('@/components/json-block'), {
   ssr: false,
@@ -28,7 +28,7 @@ export default function Home() {
 
   const handleChange = useCallback((ev: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(ev.target.value);
-  }, [value])
+  }, [setValue])
 
   const handleCopy = useCallback((block: 'json' | 'yaml') => {
     if (block === "json") {

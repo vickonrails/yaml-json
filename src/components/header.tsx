@@ -20,7 +20,7 @@ const Header = ({ setValue, setFilename, navigateTarget }: HeaderProps) => {
         setTimeout(() => {
             input?.focus();
         }, 500)
-    }, [])
+    }, [navigateTarget])
 
     return (
         <header className='max-w-md mx-auto mb-6 pt-20 pb-10'>

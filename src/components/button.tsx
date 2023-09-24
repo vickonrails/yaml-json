@@ -47,7 +47,7 @@ export function CopyToClipboard({ className, icon: baseIcon = <Clipboard size={2
         return () => {
             clearTimeout(timer)
         }
-    }, [onClick])
+    }, [onClick, setIcon, baseIcon])
 
     return (
         <button className={classes} onClick={handleClick} {...props}>
@@ -73,7 +73,7 @@ export function Download({ content, filename, className, ...rest }: DownloadProp
         link.download = `${filename ?? 'data'}.json`;
         link.click();
         URL.revokeObjectURL(url);
-    }, [content])
+    }, [content, filename])
 
     return (
         <CopyToClipboard
